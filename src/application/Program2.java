@@ -27,6 +27,10 @@ public class Program2 {
 		System.out.println("Inserted! New id: " + dep.getId());
 		
 		System.out.println("=== TEST4: seller update ===");
+		dep = depDao.findById(7);
+		dep.setName("D3");
+		depDao.update(dep);
+		System.out.println("Update completed!");
 		
 		System.out.println("=== TEST5: seller delete ===");
 	}

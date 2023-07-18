@@ -16,17 +16,15 @@ public class Program2 {
 		Department dep = depDao.findById(1);
 		System.out.println(dep);
 
+		System.out.println("=== TEST2: seller findAll ===");
+		List<Department> list = depDao.findAll();
+		list.forEach(System.out::println);
 		
-
-		System.out.println("=== TEST2: seller findByDepartment ===");
-
-		System.out.println("=== TEST3: seller findAll ===");
+		System.out.println("=== TEST3: seller insert ===");
 		
-//		System.out.println("=== TEST4: seller insert ===");
+		System.out.println("=== TEST4: seller update ===");
 		
-		System.out.println("=== TEST5: seller update ===");
-		
-		System.out.println("=== TEST6: seller delete ===");
+		System.out.println("=== TEST5: seller delete ===");
 	}
 
 }

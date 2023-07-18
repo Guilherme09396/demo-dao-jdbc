@@ -21,6 +21,10 @@ public class Program2 {
 		list.forEach(System.out::println);
 		
 		System.out.println("=== TEST3: seller insert ===");
+		dep = new Department();
+		dep.setName("D2");
+		depDao.insert(dep);
+		System.out.println("Inserted! New id: " + dep.getId());
 		
 		System.out.println("=== TEST4: seller update ===");
 		

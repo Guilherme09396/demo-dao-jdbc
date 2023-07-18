@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
 
 import db.DB;
 import db.DbException;
@@ -21,14 +24,31 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
 	@Override
 	public void insert(Department obj) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		
+		String sql = "INSERT INTO department (Name) VALUES (?)";
+		try {
+			st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			st.setString(1, obj.getName());
+			int rowsAffectd = st.executeUpdate();
+			
+			if(rowsAffectd>0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next()) {
+					obj.setId(rs.getInt(1));
+				}
+				DB.closeResultSet(rs);
+			} else {
+				throw new DbException("Unexpected error! No rows affectd!");
+			}
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
 		
 	}
 
 	@Override
 	public void update(Department obj) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
